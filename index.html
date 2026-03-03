@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClickShield AI - Real-Time Online Protection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 54, 93, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        
+        .shield-icon {
+            width: 32px;
+            height: 32px;
+            margin-right: 10px;
+            background: linear-gradient(135deg, #ed8936, #ffffff);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #1a365d;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #ed8936;
+        }
+        
+        .cta-nav {
+            background: #ed8936;
+            color: #ffffff !important;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-nav:hover {
+            background: #dd7324;
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a365d 0%, #2d5a8b 100%);
+            color: #ffffff;
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ed8936;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .cta-button {
+            background: #ed8936;
+            color: #ffffff;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 1rem 0.5rem;
+        }
+        
+        .cta-button:hover {
+            background: #dd7324;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(237, 137, 54, 0.3);
+        }
+        
+        .cta-secondary {
+            background: transparent;
+            border: 2px solid #ffffff;
+            color: #ffffff;
+        }
+        
+        .cta-secondary:hover {
+            background: #ffffff;
+            color: #1a365d;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: #f8fafc;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a365d;
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ed8936, #ff9f40);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+            color: #ffffff;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a365d;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            padding: 5rem 0;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .step {
+            text-align: center;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: #ed8936;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 0 auto 1rem;
+        }
+        
+        .step h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1a365d;
+            margin-bottom: 1rem;
+        }
+        
+        .step p {
+            color: #666;
+        }
+        
+        /* Pricing */
+        .pricing {
+            padding: 5rem 0;
+            background: #f8fafc;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .pricing-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .popular {
+            border: 3px solid #ed8936;
+            position: relative;
+        }
+        
+        .popular::before {
+            content: "Most Popular";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ed8936;
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a365d;
+            margin-bottom: 0.5rem;
+        }
+        
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ed8936;
+            margin-bottom: 2rem;
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .plan-features li {
+            padding: 0.5rem 0;
+            color: #666;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .plan-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #ed8936;
+            font-weight: bold;
+        }
+        
+        .plan-button {
+            background: #1a365d;
+            color: #ffffff;
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .plan-button:hover {
+            background: #2d5a8b;
+        }
+        
+        .popular .plan-button {
+            background: #ed8936;
+        }
+        
+        .popular .plan-button:hover {
+            background: #dd7324;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 0;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .testimonial {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+        
+        .testimonial::before {
+            content: """;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: #ed8936;
+            line-height: 1;
+        }
+        
+        .testimonial p {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            padding-top: 1rem;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: #1a365d;
+        }
+        
+        .testimonial-role {
+            font-size: 0.9rem;
+            color: #999;
+        }
+        
+        /* FAQ */
+        .faq {
+            padding: 5rem 0;
+            background: #f8fafc;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: #ffffff;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-question {
+            background: #1a365d;
+            color: #ffffff;
+            padding: 1.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: #2d5a8b;
+        }
+        
+        .faq-answer {
+            padding: 1.5rem;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        footer {
+            background: #1a365d;
+            color: #ffffff;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #ed8936;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            line-height: 1.6;
+        }
+        
+        .footer-section a:hover {
+            color: #ed8936;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #2d5a8b;
+            padding-top: 1rem;
+            text-align: center;
+            color: #cbd5e0;
+        }
+        
+        .email-signup {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .email-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        
+        .signup-button {
+            background: #ed8936;
+            color: #ffffff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .signup-button:hover {
+            background: #dd7324;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                gap: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .features-grid,
+            .pricing-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .email-signup {
+                flex-direction: column;
+            }
+            
+            .cta-button {
+                margin: 0.5rem 0;
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">
+                    <div class="shield-icon">🛡</div>
+                    ClickShield AI
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#pricing" class="cta-nav">Get Protected</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Stop Scams Before They<br>Cost You Thousands</h1>
+            <p class="subtitle">AI-powered real-time protection against fake shopping sites, phishing attempts, and online scams. Get instant warnings before you enter payment details.</p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">$3.1B</span>
+                    <span class="stat-label">Lost to scams in Australia (2022)</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">$7,800</span>
+                    <span class="stat-label">Average victim loss</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">99.8%</span>
+                    <span class="stat-label">Detection accuracy</span>
+                </div>
+            </div>
+            
+            <div>
+                <a href="#pricing" class="cta-button">Start Free Trial</a>
+                <a href="#how-it-works" class="cta-button cta-secondary">See How It Works</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Advanced AI Protection</h2>
+            <p class="section-subtitle">Unlike traditional antivirus software that only catches known threats, our AI analyzes websites in real-time to detect new scams as they appear.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Real-Time AI Analysis</h3>
+                    <p>Advanced machine learning algorithms analyze website content, layout patterns, and social engineering tactics to detect scams instantly - not just URL blacklists.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🛒</div>
+                    <h3>Smart Shopping Protection</h3>
+                    <p>Verify merchant legitimacy, compare prices across retailers, and get alerts before purchasing from suspicious sites. Protect yourself from fake shopping sites.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🌏</div>
+                    <h3>ANZ-Specific Intelligence</h3>
+                    <p>Specialized threat database covering local Australian and New Zealand scam campaigns with cultural context and regional threat patterns.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant Warnings</h3>
+                    <p>Get immediate, non-intrusive alerts before entering payment details or personal information on suspicious websites. Clean UI that builds trust.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How ClickShield AI Works</h2>
+            <p class="section-subtitle">Three simple steps to complete online protection</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Install & Activate</h3>
+                    <p>Install the Chrome extension in under 30 seconds. No configuration needed - protection starts immediately.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>AI Scans Every Site</h3>
+                    <p>Our AI analyzes websites in real-time as you browse, checking for scam indicators, fake merchants, and phishing attempts.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Get Instant Alerts</h3>
+                    <p>Receive immediate warnings before entering sensitive information. Shop and browse with complete confidence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="section-title">Choose Your Protection Level</h2>
+            <p class="section-subtitle">Start free and upgrade as your needs grow. All plans include our core scam detection technology.</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-name">Free</div>
+                    <div class="plan-price">$0<span style="font-size: 1rem; color: #666;">/mo</span></div>
+                    <ul class="plan-features">
+                        <li>Basic scam site detection</li>
+                        <li>5 site checks per day</li>
+                        <li>Community threat database</li>
+                        <li>Email support</li>
+                    </ul>
+                    <button class="plan-button">Get Started Free</button>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="plan-name">Guardian</div>
+                    <div class="plan-price">$9.99<span style="font-size: 1rem; color: #666;">/mo</span></div>
+                    <ul class="plan-features">
+                        <li>Unlimited scanning</li>
+                        <li>AI-powered shopping protection</li>
+                        <li>Price comparison alerts</li>
+                        <li>Priority support</li>
+                        <li>Advanced threat detection</li>
+                    </ul>
+                    <button class="plan-button">Start 14-Day Trial</button>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="plan-name">Family Shield</div>
+                    <div class="plan-price">$19.99<span style="font-size: 1rem; color: #666;">/mo</span></div>
+                    <ul class="plan-features">
+                        <li>Up to 5 family accounts</li>
+                        <li>Parental controls</li>
+                        <li>Detailed threat reports</li>
+                        <li>VPN integration</li>
+                        <li>Identity monitoring</li>
+                    </ul>
+                    <button class="plan-button">Protect Your Family</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Users Say</h2>
+            <p class="section-subtitle">Join thousands of protected users across Australia and New Zealand</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <p>ClickShield AI saved me from a fake Kmart website that looked completely legitimate. I was about to enter my credit card details when the warning popped up. Worth every penny!</p>
+                    <div class="testimonial-author">Sarah Mitchell</div>
+                    <div class="testimonial-role">Melbourne, VIC</div>
+                </div>
+                
+                <div class="testimonial">
+                    <p>As a small business owner, protecting my employees from phishing emails and fake sites is crucial. The Family Shield plan gives us peace of mind and detailed reports.</p>
+                    <div class="testimonial-author">David Chen</div>
+                    <div class="testimonial-role">Auckland, NZ</div>
+                </div>
+                
+                <div class="testimonial">
+                    <p>I'm not very tech-savvy, but this extension is so easy to use. It's already blocked three suspicious investment sites that tried to get my banking details.</p>
+                    <div class="testimonial-author">Margaret Thompson</div>
+                    <div class="testimonial-role">Brisbane, QLD</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">How does ClickShield AI differ from regular antivirus software?</div>
+                    <div class="faq-answer">Traditional antivirus software only catches known threats from blacklists. Our AI analyzes website content, layout patterns, and social engineering tactics in real-time to detect new scam sites as they appear - even if they've never been reported before.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Will this slow down my browsing experience?</div>
+                    <div class="faq-answer">No. Our lightweight extension runs in the background and analyzes sites instantly. Most users don't notice any performance impact while browsing.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">What makes this better for Australian and New Zealand users?</div>
+                    <div class="faq-answer">We maintain specialized threat intelligence covering local scam campaigns, cultural context, and regional threat patterns specific to ANZ. Our database includes Australian shopping sites, local bank phishing attempts, and region-specific romance scams.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Can I use this on multiple devices?</div>
+                    <div class="faq-answer">The Guardian plan covers one user across multiple Chrome browsers. The Family Shield plan includes up to 5 family accounts, perfect for protecting your entire household.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">What happens if I encounter a false positive?</div>
+                    <div class="faq-answer">You can easily report false positives through the extension, and our team reviews them within 24 hours. Premium users get priority handling of reports and can whitelist trusted sites.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ClickShield AI</h3>
+                    <p>Protecting Australian and New Zealand families from online scams with advanced AI technology. Join thousands of users who browse safely every day.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="#features">Features</a></p>
+                    <p><a href="#pricing">Pricing</a></p>
+                    <p><a href="#faq">FAQ</a></p>
+                    <p><a href="#">Privacy Policy</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <p><a href="#">Help Center</a></p>
+                    <p><a href="#">Contact Us</a></p>
+                    <p><a href="#">Report Scam</a></p>
+                    <p><a href="#">System Status</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Stay Protected</h3>
+                    <p>Get weekly scam alerts and protection tips delivered to your inbox.</p>
+                    <div class="email-signup">
+                        <input type="email" placeholder="Your email address" class="email-input">
+                        <button class="signup-button">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ClickShield AI. All rights reserved. | Made in Australia 🇦🇺</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
