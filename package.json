@@ -1,0 +1,16 @@
+{
+  "name": "clickshield-ai-chrome-extension-for-real-time-scam-shopping-protection",
+  "version": "0.1.0",
+  "description": "A Chrome extension that uses AI to instantly detect and block scam websites, fake shopping sites, and phishing attempts in real-time. Users get immediate warnings before entering payment details or pe",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "ai",
+    "saas",
+    "the-firm"
+  ],
+  "author": "The Firm — AI Venture Studio",
+  "license": "MIT"
+}
