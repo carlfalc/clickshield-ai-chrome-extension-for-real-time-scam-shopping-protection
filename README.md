@@ -1,0 +1,2 @@
+# clickshield-ai-chrome-extension-for-real-time-scam-shopping-protection
+A Chrome extension that uses AI to instantly detect and block scam websites, fake shopping sites, and phishing attempts in real-time. Users get immediate warnings before entering payment details or personal information. The product monetizes through premium features like advanced threat detection, shopping price comparisons, and white-label licensi
